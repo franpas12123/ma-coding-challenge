@@ -19,6 +19,10 @@ const handleClick = () => {
     errorMsg.value = 'You can only enter up to 50 numbers.'
     return
   }
+  if (inputs.length === 0) {
+    errorMsg.value = 'Please input at least one number.'
+    return
+  }
   if (inputs.some((num) => isNaN(Number(num)))) {
     errorMsg.value = 'Please enter only numbers.'
     return
