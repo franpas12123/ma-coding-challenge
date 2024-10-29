@@ -1,20 +1,20 @@
 <script setup>
 import { ref } from 'vue'
 import { RouterView } from 'vue-router'
+import { useStore } from './stores/store'
+import { storeToRefs } from 'pinia'
 import AppHome from './components/AppHome.vue'
 import AppNav from './components/AppNav.vue'
 
 const myVar = 'My Vue App'
-const isDarkMode = ref(false)
 
-const toggleTheme = () => {
-  isDarkMode.value = !isDarkMode.value
-}
+const { toggleDarkMode } = useStore()
+const { isDarkMode, btnClass } = storeToRefs(useStore())
 </script>
 
 <template>
-  <div :class="{ 'dark-mode': isDarkMode, 'light-mode': !isDarkMode }" class="h-screen">
-    <button @click="toggleTheme" class="absolute right-0 p-2">
+  <div :class="{ 'dark-mode': isDarkMode, 'light-mode': !isDarkMode }" class="h-screen pt-5">
+    <button class="absolute right-0 p-2" :class="btnClass" @click="toggleDarkMode">
       <span v-if="isDarkMode">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -51,7 +51,7 @@ const toggleTheme = () => {
 
     <h1 class="text-4xl font-bold underline text-center">{{ myVar }}</h1>
 
-    <div class="flex">
+    <div class="flex mt-8 h-full">
       <AppNav />
       <div class="flex">
         <RouterView />
