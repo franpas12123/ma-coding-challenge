@@ -2,8 +2,10 @@
 import { useStore } from '../stores/store'
 import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
+import { NAV } from '../constants'
+import AppShowHide from './AppShowHide.vue'
 
-const { name, textareaClass, btnClass } = storeToRefs(useStore())
+const { name, textareaClass, btnClass, navState } = storeToRefs(useStore())
 const input = ref('')
 const result = ref('')
 
@@ -28,34 +30,42 @@ const handleClick = () => {
   })
   // format the result string
   result.value = uniqueCounts.map((count) => `${count.number} - ${count.count}`).join(' ')
+
+  navState.value.restapi.hideSection = false
+}
+
+const handleShowHideClick = () => {
+  navState.value.iloveArray.hideSection = !navState.value.iloveArray.hideSection
 }
 </script>
 <template>
-  <div>
-    <h1>Hello {{ name }}</h1>
-
-    <section>
-      <p>
-        The textbox will accept a comma delimited numbers which will be converted into an
-        array. The numbers will be any number from 0 to 9 and up to 50 elements – a number
-        may appear multiple times. When the user clicked the submit button, it will
-        display all the unique numbers with their corresponding counts in the results
-        section. Sort the result by count from highest to lowest then by number highest to
-        lowest. Example input: 4, 5, 6, 7, 8, 9, 8, 4, 5, 4 Example output: (Number -
-        Count) 4 - 3 8 - 2 5 - 2 9 - 1 7 - 1 6 – 1
+  <AppShowHide class="mt-5 py-1" :show="navState.iloveArray.hideSection" @toggle="handleShowHideClick" :label="NAV.ILOVEARRAYS" />
+  <section v-if="!navState.iloveArray.hideSection">
+    <h1 class="text-2xl font-bold">Hello, {{ name }}</h1>
+    <p>
+      The textbox will accept a comma delimited numbers which will be converted into an
+      array. The numbers will be any number from 0 to 9 and up to 50 elements – a number
+      may appear multiple times. When the user clicked the submit button, it will display
+      all the unique numbers with their corresponding counts in the results section. Sort
+      the result by count from highest to lowest then by number highest to lowest. Example
+      input: 4, 5, 6, 7, 8, 9, 8, 4, 5, 4 Example output: (Number - Count) 4 - 3 8 - 2 5 -
+      2 9 - 1 7 - 1 6 – 1
+    </p>
+    <div class="flex flex-col">
+      <p v-if="result.length" class="mt-2 font-bold">
+        (Number - Count) <span class="text-green-500">{{ result }}</span>
       </p>
-      <div class="flex flex-col">
-        <p>(Number - Count) {{ result }}</p>
-        <textarea
-          :class="textareaClass"
-          name="textarea"
-          id="textarea"
-          v-model="input"
-        ></textarea>
-        <button :class="btnClass" @click="handleClick">Submit</button>
-      </div>
-    </section>
-  </div>
+      <textarea
+        :class="textareaClass"
+        class="mt-2"
+        name="textarea"
+        id="textarea"
+        v-model="input"
+      />
+
+      <button :class="btnClass" class="mt-3" @click="handleClick">Submit</button>
+    </div>
+  </section>
 </template>
 
 <style lang="scss" scoped></style>
