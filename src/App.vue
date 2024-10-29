@@ -15,7 +15,7 @@ const { name, isDarkMode, isDarkLightClass } = storeToRefs(useStore())
 <template>
   <div
     :class="{ 'dark-mode': isDarkMode, 'light-mode': !isDarkMode }"
-    class="h-screen pt-5"
+    class="min-h-screen pt-5"
   >
     <button class="absolute right-2 p-2" :class="isDarkLightClass" @click="toggleDarkMode">
       <span v-if="isDarkMode">
