@@ -15,7 +15,7 @@ export const useStore = defineStore('store', () => {
     return isDarkMode.value ? 'textarea-dark' : 'textarea-light'
   })
   const btnClass = computed(() => {
-    return isDarkMode.value ? 'btn-dark' : 'btn-light'
+    return `btn ${isDarkMode.value ? 'btn-dark' : 'btn-light'}`
   })
 
   const navState = ref({
