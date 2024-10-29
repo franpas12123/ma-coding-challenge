@@ -32,6 +32,7 @@ const handleClick = () => {
   result.value = uniqueCounts.map((count) => `${count.number} - ${count.count}`).join(' ')
 
   navState.value.restapi.hideSection = false
+  navState.value.iloveArray.isDone = true
 }
 
 const handleShowHideClick = () => {
