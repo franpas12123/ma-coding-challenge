@@ -3,7 +3,7 @@ import { useStore } from '../stores/store'
 import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
 
-const { name } = storeToRefs(useStore())
+const { name, textareaClass, btnClass } = storeToRefs(useStore())
 const input = ref('')
 const result = ref('')
 
@@ -11,7 +11,7 @@ const handleClick = () => {
   const numbers = input.value.split(',').map(Number)
   // count the occurrences of each number
   const counts = {}
-  numbers.forEach(num => {
+  numbers.forEach((num) => {
     counts[num] = (counts[num] || 0) + 1
   })
   // convert the counts object into an array of objects with number and count properties
@@ -27,7 +27,7 @@ const handleClick = () => {
     return b.count - a.count
   })
   // format the result string
-  result.value = uniqueCounts.map(count => `${count.number} - ${count.count}`).join(' ')
+  result.value = uniqueCounts.map((count) => `${count.number} - ${count.count}`).join(' ')
 }
 </script>
 <template>
@@ -46,8 +46,13 @@ const handleClick = () => {
       </p>
       <div class="flex flex-col">
         <p>(Number - Count) {{ result }}</p>
-        <textarea name="textarea" id="textarea" v-model="input"></textarea>
-        <button @click="handleClick">Submit</button>
+        <textarea
+          :class="textareaClass"
+          name="textarea"
+          id="textarea"
+          v-model="input"
+        ></textarea>
+        <button :class="btnClass" @click="handleClick">Submit</button>
       </div>
     </section>
   </div>
