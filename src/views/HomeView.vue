@@ -5,14 +5,14 @@ import RestAPI from '../components/RestAPI.vue'
 import { useStore } from '../stores/store'
 import { storeToRefs } from 'pinia'
 
-const { name } = storeToRefs(useStore())
+const { name, isIloveArrayDone } = storeToRefs(useStore())
 </script>
 
 <template>
   <div>
     <AppHome />
-    <ILoveArrays v-if="name.length" />
-    <RestAPI v-if="name.length" />
+    <ILoveArrays v-if="name.length" class="mt-5" />
+    <RestAPI v-if="name.length && isIloveArrayDone" class="mt-5" />
   </div>
 </template>
 
