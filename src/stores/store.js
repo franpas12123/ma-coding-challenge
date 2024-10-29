@@ -21,7 +21,7 @@ export const useStore = defineStore('store', () => {
       isDone: false,
       hideSection: false
     },
-    iloveArray: {
+    iloveArrays: {
       name: NAV.ILOVEARRAYS,
       isDone: false,
       hideSection: false
@@ -33,9 +33,9 @@ export const useStore = defineStore('store', () => {
     }
   })
 
-  const isIloveArrayDone = computed(() => {
-    return navState.value.iloveArray.isDone
+  const isIloveArraysDone = computed(() => {
+    return navState.value.iloveArrays.isDone
   })
 
-  return { name, isDarkMode, toggleDarkMode, isDarkLightClass, navState, isIloveArrayDone }
+  return { name, isDarkMode, toggleDarkMode, isDarkLightClass, navState, isIloveArraysDone }
 })
