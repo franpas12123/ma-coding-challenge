@@ -8,9 +8,23 @@ import AppShowHide from './AppShowHide.vue'
 const { name, isDarkLightClass, navState } = storeToRefs(useStore())
 const input = ref('')
 const result = ref('')
+const errorMsg = ref('')
 
 const handleClick = () => {
-  const numbers = input.value.split(',').map(Number)
+  const inputs = input.value.split(',')
+  if (inputs.length > 50) {
+    errorMsg.value = 'You can only enter up to 50 numbers.'
+    return
+  }
+  if (inputs.some((num) => isNaN(Number(num)))) {
+    errorMsg.value = 'Please enter only numbers.'
+    return
+  }
+  if (inputs.some((num) => num === '' || num.trim() === '' || parseInt(num) < 0 || parseInt(num) > 9)) {
+    errorMsg.value = 'Please enter valid numbers.'
+    return
+  }
+  const numbers = inputs.map((num) => Number(num))
   // count the occurrences of each number
   const counts = {}
   numbers.forEach((num) => {
@@ -56,12 +70,15 @@ const handleShowHideClick = () => {
       <p v-if="result.length" class="mt-2 font-bold">
         (Number - Count) <span class="text-green-500">{{ result }}</span>
       </p>
+      <p v-if="errorMsg.length" class="text-red-500 font-medium">{{ errorMsg }}</p>
       <textarea
         :class="isDarkLightClass"
         class="mt-2"
         name="textarea"
         id="textarea"
         v-model="input"
+        @change="errorMsg = ''"
+        @input="errorMsg = ''"
       />
 
       <button :class="isDarkLightClass" class="mt-3" @click="handleClick">Submit</button>
