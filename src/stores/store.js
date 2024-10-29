@@ -11,11 +11,8 @@ export const useStore = defineStore('store', () => {
   const toggleDarkMode = () => {
     isDarkMode.value = !isDarkMode.value
   }
-  const textareaClass = computed(() => {
-    return isDarkMode.value ? 'textarea-dark' : 'textarea-light'
-  })
-  const btnClass = computed(() => {
-    return `btn ${isDarkMode.value ? 'btn-dark' : 'btn-light'}`
+  const isDarkLightClass = computed(() => {
+    return `${isDarkMode.value ? 'dark' : 'light'}`
   })
 
   const navState = ref({
@@ -40,5 +37,5 @@ export const useStore = defineStore('store', () => {
     return navState.value.iloveArray.isDone
   })
 
-  return { name, isDarkMode, toggleDarkMode, textareaClass, btnClass, navState, isIloveArrayDone }
+  return { name, isDarkMode, toggleDarkMode, isDarkLightClass, navState, isIloveArrayDone }
 })

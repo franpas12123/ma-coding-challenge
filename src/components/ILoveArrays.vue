@@ -5,7 +5,7 @@ import { ref } from 'vue'
 import { NAV } from '../constants'
 import AppShowHide from './AppShowHide.vue'
 
-const { name, textareaClass, btnClass, navState } = storeToRefs(useStore())
+const { name, isDarkLightClass, navState } = storeToRefs(useStore())
 const input = ref('')
 const result = ref('')
 
@@ -57,14 +57,14 @@ const handleShowHideClick = () => {
         (Number - Count) <span class="text-green-500">{{ result }}</span>
       </p>
       <textarea
-        :class="textareaClass"
+        :class="isDarkLightClass"
         class="mt-2"
         name="textarea"
         id="textarea"
         v-model="input"
       />
 
-      <button :class="btnClass" class="mt-3" @click="handleClick">Submit</button>
+      <button :class="isDarkLightClass" class="mt-3" @click="handleClick">Submit</button>
     </div>
   </section>
 </template>

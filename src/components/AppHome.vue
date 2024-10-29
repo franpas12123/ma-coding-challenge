@@ -5,7 +5,7 @@ import { storeToRefs } from 'pinia'
 import AppShowHide from './AppShowHide.vue'
 import { NAV } from '../constants'
 
-const { name, textareaClass, navState } = storeToRefs(useStore())
+const { name, isDarkLightClass, navState } = storeToRefs(useStore())
 const handleShowHideClick = () => {
   navState.value.home.hideSection = !navState.value.home.hideSection
 }
@@ -21,7 +21,7 @@ const handleShowHideClick = () => {
     />
     <textarea
       v-if="!navState.home.hideSection"
-      :class="textareaClass"
+      :class="isDarkLightClass"
       name="name"
       id="name"
       v-model="name"

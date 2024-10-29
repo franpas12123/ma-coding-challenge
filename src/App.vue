@@ -9,7 +9,7 @@ import AppNav from './components/AppNav.vue'
 const myVar = 'My Vue App'
 
 const { toggleDarkMode } = useStore()
-const { name, isDarkMode, btnClass } = storeToRefs(useStore())
+const { name, isDarkMode, isDarkLightClass } = storeToRefs(useStore())
 </script>
 
 <template>
@@ -17,7 +17,7 @@ const { name, isDarkMode, btnClass } = storeToRefs(useStore())
     :class="{ 'dark-mode': isDarkMode, 'light-mode': !isDarkMode }"
     class="h-screen pt-5"
   >
-    <button class="absolute right-2 p-2" :class="btnClass" @click="toggleDarkMode">
+    <button class="absolute right-2 p-2" :class="isDarkLightClass" @click="toggleDarkMode">
       <span v-if="isDarkMode">
         <svg
           xmlns="http://www.w3.org/2000/svg"

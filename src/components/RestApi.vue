@@ -5,7 +5,7 @@ import { storeToRefs } from 'pinia'
 import AppShowHide from './AppShowHide.vue'
 import { NAV } from '../constants'
 
-const { name, btnClass, navState } = storeToRefs(useStore())
+const { name, isDarkLightClass, navState } = storeToRefs(useStore())
 
 // fetch 6 images from the API: https://dog.ceo/api/breeds/image/random
 const fetchImages = async () => {
@@ -73,7 +73,7 @@ const handleShowHideClick = () => {
     </Suspense>
     <div class="flex flex-col my-6">
       <button
-        :class="btnClass"
+        :class="isDarkLightClass"
         @click="refreshImages"
       >
         Refresh
