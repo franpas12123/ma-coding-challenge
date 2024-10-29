@@ -32,16 +32,16 @@ const handleClick = () => {
   result.value = uniqueCounts.map((count) => `${count.number} - ${count.count}`).join(' ')
 
   navState.value.restapi.hideSection = false
-  navState.value.iloveArray.isDone = true
+  navState.value.iloveArrays.isDone = true
 }
 
 const handleShowHideClick = () => {
-  navState.value.iloveArray.hideSection = !navState.value.iloveArray.hideSection
+  navState.value.iloveArrays.hideSection = !navState.value.iloveArrays.hideSection
 }
 </script>
 <template>
-  <AppShowHide class="mt-5 py-1" :show="navState.iloveArray.hideSection" @toggle="handleShowHideClick" :label="NAV.ILOVEARRAYS" />
-  <section v-if="!navState.iloveArray.hideSection">
+  <AppShowHide class="mt-5 py-1" :show="navState.iloveArrays.hideSection" @toggle="handleShowHideClick" :label="NAV.ILOVEARRAYS" />
+  <section v-if="!navState.iloveArrays.hideSection">
     <h1 class="text-2xl font-bold">Hello, {{ name }}</h1>
     <p>
       The textbox will accept a comma delimited numbers which will be converted into an
