@@ -9,12 +9,15 @@ import AppNav from './components/AppNav.vue'
 const myVar = 'My Vue App'
 
 const { toggleDarkMode } = useStore()
-const { isDarkMode, btnClass } = storeToRefs(useStore())
+const { name, isDarkMode, btnClass } = storeToRefs(useStore())
 </script>
 
 <template>
-  <div :class="{ 'dark-mode': isDarkMode, 'light-mode': !isDarkMode }" class="h-screen pt-5">
-    <button class="absolute right-0 p-2" :class="btnClass" @click="toggleDarkMode">
+  <div
+    :class="{ 'dark-mode': isDarkMode, 'light-mode': !isDarkMode }"
+    class="h-screen pt-5"
+  >
+    <button class="absolute right-2 p-2" :class="btnClass" @click="toggleDarkMode">
       <span v-if="isDarkMode">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -53,7 +56,11 @@ const { isDarkMode, btnClass } = storeToRefs(useStore())
 
     <div class="flex mt-8 h-full">
       <AppNav />
-      <div class="flex">
+      <div class="flex flex-col pr-4 pl-2">
+        <h1 v-if="name.length" class="font-bold text-3xl py-2">
+          Hello, {{ name }}
+        </h1>
+
         <RouterView />
       </div>
     </div>
