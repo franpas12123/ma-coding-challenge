@@ -11,7 +11,7 @@ const result = ref('')
 const errorMsg = ref('')
 
 const handleClick = () => {
-  const inputs = input.value.split(',')
+  const inputs = input.value.split(',').map((num) => num.trim()).filter((num) => num !== '')
   if (inputs.length > 50) {
     errorMsg.value = 'You can only enter up to 50 numbers.'
     return
@@ -20,8 +20,8 @@ const handleClick = () => {
     errorMsg.value = 'Please enter only numbers.'
     return
   }
-  if (inputs.some((num) => num === '' || num.trim() === '' || parseInt(num) < 0 || parseInt(num) > 9)) {
-    errorMsg.value = 'Please enter valid numbers.'
+  if (inputs.some((num) => Number(num) < 0 || Number(num) > 9)) {
+    errorMsg.value = 'Numbers should be 0 to 9.'
     return
   }
   const numbers = inputs.map((num) => Number(num))
