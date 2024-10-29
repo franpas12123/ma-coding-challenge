@@ -1,15 +1,36 @@
-<script setup></script>
+<script setup>
+import { useStore } from '../stores/store'
+import { storeToRefs } from 'pinia'
+import { NAV } from '../constants'
+import AppShowHide from './AppShowHide.vue'
+
+const { name, isIloveArraysDone, navState } = storeToRefs(useStore())
+
+const handleShowHideClick = (hideSection) => {
+  navState.value[hideSection].hideSection = !navState.value[hideSection].hideSection
+}
+</script>
 <template>
-  <nav class="w-32">
+  <nav class="min-w-32 pl-3">
     <ul class="flex flex-col">
       <li>
-        <router-link to="/">Home</router-link>
+        <p>{{ NAV.HOME }}</p>
       </li>
-      <li>
-        <router-link to="/i-love-arrays">I love Arrays</router-link>
+      <li v-if="name.length">
+        <AppShowHide
+          class="py-1"
+          :show="navState.iloveArrays.hideSection"
+          @toggle="handleShowHideClick('iloveArrays')"
+          :label="NAV.ILOVEARRAYS"
+        />
       </li>
-      <li>
-        <router-link to="/rest-api">REST API</router-link>
+      <li v-if="name.length && isIloveArraysDone">
+        <AppShowHide
+          class="py-1"
+          :show="navState.restapi.hideSection"
+          @toggle="handleShowHideClick('restapi')"
+          :label="NAV.RESTAPI"
+        />
       </li>
     </ul>
   </nav>
