@@ -27,14 +27,15 @@ const refreshImages = async () => {
   images.value.length = 0
   for (let i = 0; i < 6; i++) {
     const img = await fetchImages()
+    // if image is not already in the array, add it
     if (!images.value.includes(img)) {
       images.value.push(img)
     } else {
+      // if image is already in the array, try again
       i--
     }
   }
   showSection.value = true
-  console.log(images)
 }
 
 const showSection = ref(false)
